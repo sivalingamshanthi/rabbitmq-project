@@ -1,5 +1,6 @@
 package com.solstice.rabbitmqproducer;
 
+import com.solstice.rabbitmq.CustomMessage;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Exchange;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -20,7 +21,8 @@ public class ProducerController {
 
     @PostMapping("/send/{message}")
     public String sendMessage(@PathVariable String message) {
-        rabbitTemplate.convertAndSend(exchange.getName(), "someKey", message);
+        CustomMessage m = new CustomMessage("a val", "b val");
+        rabbitTemplate.convertAndSend(exchange.getName(), "someKey", m);
         return "success";
     }
 
