@@ -65,6 +65,7 @@ public class ProducerController {
 
     @Bean
     public AsyncRabbitTemplate asyncTemplate(RabbitTemplate rabbitTemplate) {
+        //note that convertSendAndReceive() also takes a routing key we probably shouldn't do this twice
         rabbitTemplate.setRoutingKey("someKey");
         rabbitTemplate.setReplyAddress(replyQueue().getName());
         return new AsyncRabbitTemplate(rabbitTemplate);
