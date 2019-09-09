@@ -6,6 +6,10 @@ public class CustomMessage implements Serializable {
 	private String a;
 	private String b;
 
+	public CustomMessage() {
+
+	}
+
 	public CustomMessage(String a, String b) {
 		this.a = a;
 		this.b = b;

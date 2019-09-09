@@ -4,6 +4,7 @@ import com.solstice.rabbitmq.CustomMessage;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Exchange;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,12 +23,13 @@ public class ProducerController {
     @PostMapping("/send/{message}")
     public String sendMessage(@PathVariable String message) {
         CustomMessage m = new CustomMessage("a val", "b val");
+        rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
         rabbitTemplate.convertAndSend(exchange.getName(), "someKey", m);
         return "success";
     }
 
     @Bean
     public Exchange eventExchange() {
-        return new DirectExchange("eventExchange");
+        return new DirectExchange("eventExchange2");
     }
 }

@@ -5,7 +5,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 
 public class EventConsumer {
 
-    @RabbitListener(queues = "orderServiceQueue")
+    @RabbitListener(queues = "orderServiceQueue2")
     public void receive(CustomMessage message){
         System.out.println("Received message " + message.getA());
     }
